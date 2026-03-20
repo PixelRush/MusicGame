@@ -1,0 +1,15 @@
+# Ignore compiled Java files
+*.class
+
+# Ignore the entire Maven build folder (This is the big one!)
+target/
+
+# Ignore VS Code settings
+.settings/
+.vscode/
+.project
+.classpath
+
+# Ignore OS junk
+.DS_Store
+Thumbs.
