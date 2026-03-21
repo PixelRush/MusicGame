@@ -10,7 +10,12 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
+
+
+//DENNE KLASSEN ER IKKE I BRUK
 
 public class FileTesting {
 
@@ -48,7 +53,7 @@ public class FileTesting {
         }
     }
 
-    static void getFilesInFolder(Path path){
+    static void printFilesInFolder(Path path){
         try {
             Stream<Path> stream = Files.list(path);
             stream.forEach(System.out::println);
@@ -58,10 +63,47 @@ public class FileTesting {
             e.printStackTrace();
         }
     }
+
+    static ArrayList<String> getFilesInFolderArray(Path path){
+        ArrayList<String> fileList = new ArrayList<>();
+        try {
+            Stream<Path> stream = Files.list(path);
+            stream.forEach(s->fileList.add(s.toString()));
+            stream.close();
+            }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileList;
+    }
+
+    static ArrayList<String> getMusicFileNames(){
+        List<String> list = FileTesting.getFilesInFolderArray(Path.of("music-game", "src", "main", "resources", "don", "vo", "music"));
+        ArrayList<String> returnList = new ArrayList<>();
+        for (String pathString : list) {
+            returnList.add(pathString.replace(Path.of("music-game", "src", "main", "resources", "don", "vo", "music").toString() + "\\", "").replace(".mp3", ""));
+        }
+        return returnList;
+    }
+
+    static List<SongData> LoadSongs(){
+        List<SongData> returnList = new ArrayList<>();
+        for (String songName : getMusicFileNames()) {
+            returnList.add(new SongData(songName, songName));
+        }
+        return returnList;
+    }
     
     public static void main(String[] args) {
-        FileTesting.getFilesInFolder(Path.of("fileTest"));
-        FileTesting.getFilesInFolder(Path.of("music-game", "src", "main", "resources", "don", "vo", "music"));
+        List<String> list = getMusicFileNames();
+        for (String string : list) {
+            System.out.println(string);
+        }
+
+        for (SongData songData : LoadSongs()) {
+            System.out.println(songData.getSongName()
+            );
+        }
     }
 
 

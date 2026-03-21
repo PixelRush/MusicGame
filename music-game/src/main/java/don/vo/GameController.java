@@ -4,24 +4,29 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 
 public class GameController {
 
+    Game game;
 
     @FXML
     private AnchorPane gameRootContainer;
 
-    private Song music = new Song(GameStateData.songSelectedID);
+    @FXML
+    Circle purpleCircle;
+
 
     @FXML
     void playMusic(){
-        music.play();
+        this.game.playSong();
+        this.game.play();
         
     }
 
     @FXML
     void pauseMusic(){
-        music.pause();
+        this.game.pauseSong();
     }
 
     @FXML
@@ -31,10 +36,19 @@ public class GameController {
         App.setRoot("lobby");
     }
 
+
+    @FXML
+    void addNotePressed(){
+        this.game.addNoteToScreen(new Note());
+    }
+
+
     @FXML
     void initialize(){
 
-        gameRootContainer.sceneProperty().addListener((a,b,c)-> {});
+        this.game = new Game(gameRootContainer);
+
+        /* gameRootContainer.sceneProperty().addListener((a,b,c)-> {});
         if (gameRootContainer.getScene() != null){
 
             gameRootContainer.getScene().setOnKeyPressed(keyEvent -> {
@@ -42,7 +56,8 @@ public class GameController {
             System.out.println(keyName + "pressed");
         }
         );
-        }
-        
+        } */
+
+        //Game game = new Game();
     }
 }

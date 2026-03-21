@@ -30,6 +30,7 @@
             <Circle fill="#24c72b" layoutX="540.0" layoutY="712.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="52.0" />
             <Circle fill="#12d0d0" layoutX="610.0" layoutY="712.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="52.0" />
             <Circle fill="#136ccf" layoutX="680.0" layoutY="717.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.bottomAnchor="52.0" />
+            <Button cancelButton="true" layoutX="472.0" layoutY="339.0" mnemonicParsing="false" onAction="#addNotePressed" prefHeight="43.0" prefWidth="116.0" style="-fx-background-color: darkslategrey;" text="Add minion" textFill="#28ffc6" AnchorPane.rightAnchor="14.0" />
          </children>
       </AnchorPane>
       <Button cancelButton="true" layoutX="24.0" layoutY="109.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="47.0" style="-fx-background-color: darkslategrey;" text="Back" textFill="#28ffc6" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="109.0" />

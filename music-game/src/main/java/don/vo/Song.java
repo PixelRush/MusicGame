@@ -29,5 +29,13 @@ public class Song {
     public Duration getCurrentTime(){
         return mediaPlayer.getCurrentTime();
     }
+
+    public Duration getEndTime(){
+        return mediaPlayer.getStopTime();
+    }
+
+    public Duration getStartTime(){
+        return mediaPlayer.getStartTime();
+    }
     
 }

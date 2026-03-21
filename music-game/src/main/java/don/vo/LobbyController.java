@@ -2,6 +2,7 @@ package don.vo;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +26,7 @@ public class LobbyController {
     @FXML
     private VBox songViewVBox;
 
-
-    private List<SongData> allSongs = new ArrayList<>(List.of(
-        new SongData("Barbie Girl", "BarbieGirl"),
-        new SongData("Shut Up and Dance", "Shut Up and Dance"),
-        new SongData("Geometry Dash level 1", "Geometry Dash"),
-        new SongData("Pumped Up Kicks", "Pumped up kicks")
-    ));
+    private List<SongData> allSongs = FileHandling.getSongsList();
 
     @FXML
     void playSong(ActionEvent event) throws IOException{
@@ -48,7 +43,6 @@ public class LobbyController {
 
     @FXML
     void initialize(){
-        //Legger til sangene 
         for (SongData songData : allSongs) {
 
             SongSelectButton songSelectButton = new SongSelectButton(
@@ -61,9 +55,6 @@ public class LobbyController {
 
             songViewVBox.getChildren().add(songSelectButton.getAppearance());
         }
-
-
     }
-
 
 }
