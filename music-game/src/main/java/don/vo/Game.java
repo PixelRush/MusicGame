@@ -15,12 +15,15 @@ public class Game {
 
     private AnchorPane screen;
 
+    private SongRecord songRecord;
+
     public Game(AnchorPane anchorPane){
         if (anchorPane == null){
             throw new IllegalArgumentException("Game constructor was called with null argument");
         }
         this.screen = anchorPane;
         this.song = new Song(GameStateData.songSelectedID);
+        this.songRecord = new SongRecord();
     }
 
     public void addNoteToScreen(Note note){
@@ -61,6 +64,14 @@ public class Game {
         this.notes.remove(note);
     }
 
+    public void keyPressed(String key){
+        System.out.println("Key pressed: " + key + "at " + getSongTime().toString());
+    }
+
+    public void recordingKeyPressed(String key){
+        System.out.println("Recording this key: " + key + "    At time: " + getSongTime().toString());
+        this.songRecord.addStamp(new TimeStamp(key, getSongTime()));
+    }
     
     
     void play(){
@@ -70,7 +81,7 @@ public class Game {
             @Override
             public void handle(long now) {
                 for (Note note : notes) {
-                    note.moveTo(getSongTime(), getSongStart(), new Duration(5000), note.getY(), 0, 1000);
+                    note.moveTo(getSongTime(), note.getY(), 0, 1000);
                 }
             }
             

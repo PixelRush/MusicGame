@@ -30,16 +30,15 @@ public class LobbyController {
 
     @FXML
     void playSong(ActionEvent event) throws IOException{
+        GameStateData.playing = true;
         App.setRoot("game");
     }
 
     @FXML
-    void recordSong(ActionEvent event) {
-        
+    void recordSong(ActionEvent event) throws IOException {
+        GameStateData.recording = true; 
+        App.setRoot("game");
     }
-
-    /* public LobbyController(){
-    } */
 
     @FXML
     void initialize(){

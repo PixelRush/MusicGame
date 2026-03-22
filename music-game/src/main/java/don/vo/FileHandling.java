@@ -26,4 +26,15 @@ public class FileHandling {
         return returnList;
 
     }
+
+    static void writeSongRecordToFile(SongRecord songRecord){
+        
+        songRecord.getTimeStamps().stream().forEach(timeStamp -> );
+    }
+
+    static SongRecord importSongRecordFromFile(){
+
+        //TODO: Implement this
+        return new SongRecord();
+    }
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class GameController {
 
@@ -33,31 +34,42 @@ public class GameController {
     void back()throws IOException{
         //Må sette på pause fordi den fortsetter... 
         pauseMusic();
+        GameStateData.playing = false;
+        GameStateData.recording = false;
+
         App.setRoot("lobby");
     }
 
 
     @FXML
     void addNotePressed(){
-        this.game.addNoteToScreen(new Note());
+        this.game.addNoteToScreen(new Note(new TimeStamp("k", new Duration(5000))));
     }
 
 
     @FXML
     void initialize(){
-
         this.game = new Game(gameRootContainer);
+        //gameRootContainer.sceneProperty().addListener(null);
 
-        /* gameRootContainer.sceneProperty().addListener((a,b,c)-> {});
-        if (gameRootContainer.getScene() != null){
+        //
+        gameRootContainer.setFocusTraversable(true);
 
-            gameRootContainer.getScene().setOnKeyPressed(keyEvent -> {
-            String keyName = keyEvent.getCode().toString();
-            System.out.println(keyName + "pressed");
+        if (GameStateData.playing){
+            gameRootContainer.setOnKeyPressed(event -> {
+            System.out.println("Playing");
+            this.game.keyPressed(event.getCode().toString());
+        
+        });
         }
-        );
-        } */
 
-        //Game game = new Game();
+        if (GameStateData.recording){
+            gameRootContainer.setOnKeyPressed(event -> {
+            System.out.println("Recording");
+            this.game.recordingKeyPressed(event.getCode().toString());
+        });    
+        }
+        
+
     }
 }
