@@ -1,12 +1,18 @@
 package don.vo;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+
+import javafx.util.Duration;
 
 public class FileHandling {
     /* URL url = getClass().getResource("/don/vo/music");
@@ -27,14 +33,41 @@ public class FileHandling {
 
     }
 
-    static void writeSongRecordToFile(SongRecord songRecord){
+    static void writeSongRecordToFile(SongRecord songRecord, String name){
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(Path.of("fileTest", name).toString()));
+
+            //Må bruke enda en try catch inni lambdaen...
+            songRecord.getTimeStamps().stream().forEach(timeStamp -> {
+                try {
+                    writer.write(timeStamp.getKey());
+                    writer.write(":");
+                    writer.write(String.valueOf(timeStamp.getDuration().toMillis())+"\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         
-        songRecord.getTimeStamps().stream().forEach(timeStamp -> );
     }
 
     static SongRecord importSongRecordFromFile(){
 
         //TODO: Implement this
         return new SongRecord();
+    }
+
+    public static void main(String[] args) {
+        SongRecord songRecord = new SongRecord();
+        songRecord.addStamp(new TimeStamp("A", new Duration(1000)));
+        songRecord.addStamp(new TimeStamp("A", new Duration(2069)));
+        songRecord.addStamp(new TimeStamp("A", new Duration(2069.0001)));
+
+        writeSongRecordToFile(songRecord, "TestRecord.txt");
     }
 }

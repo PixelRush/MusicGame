@@ -46,6 +46,11 @@ public class GameController {
         this.game.addNoteToScreen(new Note(new TimeStamp("k", new Duration(5000))));
     }
 
+    @FXML 
+    void saveRecordToFile(){
+        this.game.saveRecordToFile();
+    }
+
 
     @FXML
     void initialize(){

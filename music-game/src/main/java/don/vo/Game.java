@@ -72,6 +72,10 @@ public class Game {
         System.out.println("Recording this key: " + key + "    At time: " + getSongTime().toString());
         this.songRecord.addStamp(new TimeStamp(key, getSongTime()));
     }
+
+    public void saveRecordToFile(){
+        FileHandling.writeSongRecordToFile(songRecord, "WOWOW");
+    }
     
     
     void play(){

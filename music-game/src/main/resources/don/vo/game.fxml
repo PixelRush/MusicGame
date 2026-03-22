@@ -47,6 +47,7 @@
                   <Circle fill="#136ccf" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </HBox>
+            <Button cancelButton="true" layoutX="910.0" layoutY="299.0" mnemonicParsing="false" onAction="#saveRecordToFile" style="-fx-background-color: darkslategrey;" text="Save record to file" textFill="#28ffc6" />
          </children>
       </AnchorPane>
    </children>
