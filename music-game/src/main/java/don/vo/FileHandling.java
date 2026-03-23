@@ -69,10 +69,30 @@ public class FileHandling {
         
     }
 
-    static SongRecord importSongRecordFromFile(){
+    static SongRecord importSongRecordFromFile(String fileName){
 
+            
         //TODO: Implement this
-        return new SongRecord();
+        SongRecord returnRecord = new SongRecord();
+        Path path;
+        if (Files.exists(Path.of("Song Records"))){
+            path = Path.of("Song Records", fileName);
+            }
+        else{
+            path = Path.of("..", "Song Records", fileName);
+            }
+
+        try {
+            Stream<String> stream = Files.lines(path);
+            stream.forEach(line -> {
+                returnRecord.addStamp(new TimeStamp(line.split(":")[0], new Duration(Double.valueOf(line.split(":")[1]))));
+            });
+            stream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return returnRecord;
     }
 
     public static void main(String[] args) {
@@ -84,5 +104,11 @@ public class FileHandling {
         
 
         writeSongRecordToFile(songRecord, "TestRecord.txt");
+
+        importSongRecordFromFile("TestRecord.txt");
     }
+
+    /* static SongRecord importSongRecordFromFile(String fileName){
+
+    } */
 }

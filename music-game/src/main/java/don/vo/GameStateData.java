@@ -1,5 +1,8 @@
 package don.vo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GameStateData {
     static String songSelectedID = "BarbieGirl";
     static int frameRate = 60;
@@ -8,4 +11,5 @@ public class GameStateData {
     static boolean recording = false;
     static boolean playing = false; 
     
+    static HashMap<String, String> keyBindsMap = new HashMap<>(Map.of("Key", "Value"));
 }
