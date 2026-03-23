@@ -7,4 +7,5 @@ public class GameStateData {
     static double noteSpawnY = 0;
     static boolean recording = false;
     static boolean playing = false; 
+    
 }

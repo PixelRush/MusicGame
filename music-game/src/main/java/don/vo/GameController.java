@@ -3,6 +3,7 @@ package don.vo;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -16,6 +17,9 @@ public class GameController {
 
     @FXML
     Circle purpleCircle;
+
+    @FXML
+    Button writeToFileButton;
 
 
     @FXML
@@ -55,9 +59,18 @@ public class GameController {
     @FXML
     void initialize(){
         this.game = new Game(gameRootContainer);
-        //gameRootContainer.sceneProperty().addListener(null);
 
-        //
+        //Kan skrive dette i annen klasse hvis jeg ønkser... men ikke nå. 
+        if (GameStateData.recording == false){
+            this.writeToFileButton.setVisible(false);
+        }
+        else{
+            this.writeToFileButton.setVisible(true);
+        }
+
+
+
+        //Passer på at vinduet har "focus"
         gameRootContainer.setFocusTraversable(true);
 
         if (GameStateData.playing){

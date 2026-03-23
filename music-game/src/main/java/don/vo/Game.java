@@ -74,7 +74,7 @@ public class Game {
     }
 
     public void saveRecordToFile(){
-        FileHandling.writeSongRecordToFile(songRecord, "WOWOW");
+        FileHandling.writeSongRecordToFile(songRecord, "TestRecord.txt");
     }
     
     

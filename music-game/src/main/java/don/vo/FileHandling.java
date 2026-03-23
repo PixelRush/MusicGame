@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,12 +36,22 @@ public class FileHandling {
 
     static void writeSongRecordToFile(SongRecord songRecord, String name){
 
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(Path.of("fileTest", name).toString()));
+        try { 
+            Path path;
+            if (Files.exists(Path.of("Song Records"))){
+                path = Path.of("Song Records", name);
+                System.out.println("Path: "+ System.getProperty("user.dir"));
+            }
+            else{
+                path = Path.of("..", "Song Records", name);
+                System.out.println("Using alternate path");
+            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(path.toString()));
 
-            //Må bruke enda en try catch inni lambdaen...
+            //Må bruke enda en try catch inni lambdaen, som er derfor det ser avansert ut... 
             songRecord.getTimeStamps().stream().forEach(timeStamp -> {
                 try {
+                    
                     writer.write(timeStamp.getKey());
                     writer.write(":");
                     writer.write(String.valueOf(timeStamp.getDuration().toMillis())+"\n");
@@ -50,7 +61,9 @@ public class FileHandling {
             });
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("The system likely didnt find the path");
+            System.out.println("Root: " + System.getProperty("user.dir"));
         }
 
         
@@ -67,6 +80,8 @@ public class FileHandling {
         songRecord.addStamp(new TimeStamp("A", new Duration(1000)));
         songRecord.addStamp(new TimeStamp("A", new Duration(2069)));
         songRecord.addStamp(new TimeStamp("A", new Duration(2069.0001)));
+        songRecord.addStamp(new TimeStamp("A", new Duration(6969.0001)));
+        
 
         writeSongRecordToFile(songRecord, "TestRecord.txt");
     }
