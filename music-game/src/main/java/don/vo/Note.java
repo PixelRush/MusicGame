@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class Note {
+public class Note implements Comparable<Note>{
     Circle appeareance;
     Duration spawDuration;
     Duration hitDuration;
@@ -19,6 +19,7 @@ public class Note {
         this.hitDuration = timeStamp.getDuration();
         this.spawDuration = new Duration(hitDuration.toMillis()-GameStateData.timeBeforeHit);
         this.key = timeStamp.getKey();
+        this.appeareance.setLayoutX(getY());
     }
 
     public Circle getAppeareance() {
@@ -39,9 +40,31 @@ public class Note {
        double correctPosition = (currentTime.subtract(this.spawDuration).toMillis()/travelDuration.toMillis())*totalTravelDistance+startY;
        this.appeareance.setLayoutY(correctPosition); 
     }
-       
 
+    @Override
+    public int compareTo(Note otherNote) {
+        return Double.compare(this.getSpawDuration().toMillis(), otherNote.getSpawDuration().toMillis());
+    }
 
+    public Duration getSpawDuration() {
+        return spawDuration;
+    }
 
+    public Duration getHitDuration() {
+        return hitDuration;
+    }
+
+    public String getKey() {
+        return key;
+    }
+    
+    public boolean shouldSpawn(Duration duration){
+        if (duration.greaterThanOrEqualTo(this.spawDuration)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }

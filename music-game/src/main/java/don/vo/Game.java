@@ -1,7 +1,10 @@
 package don.vo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.AnchorPane;
@@ -17,21 +20,26 @@ public class Game {
 
     private SongRecord songRecord;
 
+    private NoteSpawner noteSpawner;
+
     public Game(AnchorPane anchorPane){
         if (anchorPane == null){
             throw new IllegalArgumentException("Game constructor was called with null argument");
         }
         this.screen = anchorPane;
         this.song = new Song(GameStateData.songSelectedID);
-        this.songRecord = new SongRecord();
+        this.songRecord = FileHandling.importSongRecordFromFile(GameStateData.songSelectedID + ".txt");
+        this.noteSpawner = new NoteSpawner(this.songRecord);
     }
 
-    public void addNoteToScreen(Note note){
-        if (note == null){
-            throw new IllegalArgumentException("Cannot add null note to screen");
+    public void addNoteToScreen(Optional<Note> optionalNote){
+        Note note;
+        if (optionalNote.isPresent()){
+            note = optionalNote.get();
+            notes.add(note);
+            this.screen.getChildren().add(note.getAppeareance());
         }
-        notes.add(note);
-        this.screen.getChildren().add(note.getAppeareance());
+        
     }
 
     public void playSong(){
@@ -78,17 +86,21 @@ public class Game {
     }
     
     
+    /*
+    Denne kalles når play knappen trykkes på */
     void play(){
 
         AnimationTimer animationTimer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+                addNoteToScreen(noteSpawner.spawnNote(getSongTime()));
+
                 for (Note note : notes) {
                     note.moveTo(getSongTime(), note.getY(), 0, 1000);
                 }
-            }
-            
+                
+            }  
         };
 
         animationTimer.start();

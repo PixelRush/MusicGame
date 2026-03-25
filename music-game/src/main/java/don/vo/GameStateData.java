@@ -12,4 +12,5 @@ public class GameStateData {
     static boolean playing = false; 
     
     static HashMap<String, String> keyBindsMap = new HashMap<>(Map.of("Key", "Value"));
+    static HashMap<String, Double> noteSpawnPositions = new HashMap<>(Map.of("1", 10.0));
 }

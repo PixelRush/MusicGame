@@ -71,8 +71,6 @@ public class FileHandling {
 
     static SongRecord importSongRecordFromFile(String fileName){
 
-            
-        //TODO: Implement this
         SongRecord returnRecord = new SongRecord();
         Path path;
         if (Files.exists(Path.of("Song Records"))){
@@ -95,7 +93,7 @@ public class FileHandling {
         return returnRecord;
     }
 
-    public static void main(String[] args) {
+    /* public static void main(String[] args) {
         SongRecord songRecord = new SongRecord();
         songRecord.addStamp(new TimeStamp("A", new Duration(1000)));
         songRecord.addStamp(new TimeStamp("A", new Duration(2069)));
@@ -106,7 +104,7 @@ public class FileHandling {
         writeSongRecordToFile(songRecord, "TestRecord.txt");
 
         importSongRecordFromFile("TestRecord.txt");
-    }
+    } */
 
     /* static SongRecord importSongRecordFromFile(String fileName){
 

@@ -47,7 +47,8 @@ public class GameController {
 
     @FXML
     void addNotePressed(){
-        this.game.addNoteToScreen(new Note(new TimeStamp("k", new Duration(5000))));
+        //this.game.addNoteToScreen(new Note(new TimeStamp("k", new Duration(5000))));
+        //Jeg endrer på aaddNoteToScreen til å ta en optional note, denne vil derfor ikke kjøre 
     }
 
     @FXML 
@@ -87,6 +88,8 @@ public class GameController {
             this.game.recordingKeyPressed(event.getCode().toString());
         });    
         }
+
+        
         
 
     }
