@@ -1,9 +1,6 @@
 package don.vo;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -31,22 +28,22 @@ public class LobbyController {
     @FXML
     void playSong(ActionEvent event) throws IOException{
         GameStateData.playing = true;
-        App.setRoot("game");
+        //TODO: Kanskje legge til en sjekk om at en sang er valgt. 
+        App.setRoot("levelEdit");
     }
 
     @FXML
     void recordSong(ActionEvent event) throws IOException {
         GameStateData.recording = true; 
-        App.setRoot("game");
+        App.setRoot("levelEdit");
     }
 
     @FXML
     void initialize(){
         for (SongData songData : allSongs) {
 
-            SongSelectButton songSelectButton = new SongSelectButton(
+            TextButton songSelectButton = new TextButton(
                 songData.getSongName(),
-                songData.getSongID(),
                 ()-> {
                     GameStateData.songSelectedID = songData.getSongID();
                     songSelectedText.setText(songData.getSongName());

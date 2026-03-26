@@ -93,6 +93,32 @@ public class FileHandling {
         return returnRecord;
     }
 
+
+    static ArrayList<String> getAvailableSongRecords(){
+        Path path;
+        if (Files.exists(Path.of("Song Records"))){
+            path = Path.of("Song Records");
+            }
+        else{
+            path = Path.of("..", "Song Records");
+            }
+            
+        try {
+            Stream<Path> pathStream = Files.list(path);
+            ArrayList<String> returnList = new ArrayList<>(pathStream.map(p-> p.toString().replace(".txt", "").replace(path.toString()+"\\", "")).toList());
+            pathStream.close();
+            return returnList;
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException("Could not find the song record files!");
+        }
+    }
+
+    static ArrayList<String> getSongRecordsFromSong(String songName){
+        return new ArrayList<>(getAvailableSongRecords().stream().filter(s->s.contains(songName)).toList());
+    }
+
     /* public static void main(String[] args) {
         SongRecord songRecord = new SongRecord();
         songRecord.addStamp(new TimeStamp("A", new Duration(1000)));
@@ -108,5 +134,11 @@ public class FileHandling {
 
     /* static SongRecord importSongRecordFromFile(String fileName){
 
+    } */
+
+    /* public static void main(String[] args) {
+        for (String string : getAvailableSongRecords()) {
+            System.out.println(string);
+        }
     } */
 }

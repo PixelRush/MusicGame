@@ -28,7 +28,10 @@ public class Game {
         }
         this.screen = anchorPane;
         this.song = new Song(GameStateData.songSelectedID);
-        this.songRecord = FileHandling.importSongRecordFromFile(GameStateData.songSelectedID + ".txt");
+
+        //Denne linjen under feiler hvis det ikke finnes en slik fil, uansett om du trykker play eller record 
+        // det er fordi denne konstruktøren alltid prøver å lage SongRecord objektet. 
+        this.songRecord = FileHandling.importSongRecordFromFile(GameStateData.songRecordSelectedID + ".txt");
         this.noteSpawner = new NoteSpawner(this.songRecord);
     }
 
@@ -72,6 +75,7 @@ public class Game {
         this.notes.remove(note);
     }
 
+    //Kjører når en tast trykkes på og spiller har valgt play og ikke record. 
     public void keyPressed(String key){
         System.out.println("Key pressed: " + key + "at " + getSongTime().toString());
     }
@@ -82,7 +86,8 @@ public class Game {
     }
 
     public void saveRecordToFile(){
-        FileHandling.writeSongRecordToFile(songRecord, "TestRecord.txt");
+        //TODO: Må finne en måte å velge filnavn? For nå bruker jeg default. 
+        FileHandling.writeSongRecordToFile(songRecord, GameStateData.songRecordSelectedID + ".txt");
     }
     
     
@@ -97,7 +102,7 @@ public class Game {
                 addNoteToScreen(noteSpawner.spawnNote(getSongTime()));
 
                 for (Note note : notes) {
-                    note.moveTo(getSongTime(), note.getY(), 0, 1000);
+                    note.moveTo(getSongTime(), note.getY(), 50, 700);
                 }
                 
             }  

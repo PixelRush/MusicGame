@@ -5,21 +5,31 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
 public class Note implements Comparable<Note>{
-    Circle appeareance;
-    Duration spawDuration;
-    Duration hitDuration;
-    String key;
+    private Circle appeareance;
+    private Duration spawDuration;
+    private Duration hitDuration;
+    private String key;
 
     public Note(){
         this.appeareance = new Circle(50, Color.web("#9421ff"));
     }
 
     public Note(TimeStamp timeStamp){
-        this.appeareance = new Circle(50, Color.AQUA);
+        this.appeareance = new Circle(30, Color.AQUA);
         this.hitDuration = timeStamp.getDuration();
         this.spawDuration = new Duration(hitDuration.toMillis()-GameStateData.timeBeforeHit);
         this.key = timeStamp.getKey();
-        this.appeareance.setLayoutX(getY());
+        
+
+        //TODO: Testing code, remove later
+        this.appeareance.setLayoutX(500);
+
+        this.appeareance.setLayoutX(GameStateData.noteSpawnPositions.getOrDefault(this.key, 500.0));
+        this.appeareance.setLayoutX(
+            GameStateData.noteSpawnPositions.get(
+                GameStateData.keyBindsMap.getOrDefault(key, "Default")
+            )
+        );
     }
 
     public Circle getAppeareance() {
