@@ -10,7 +10,6 @@ public class GameStateData {
     static String songRecordSelectedID = "Empty";
     static int frameRate = 60;
     static double timeBeforeHit = 700; //I milisekunder 
-    static double noteSpawnY = 0;
     static boolean recording = false;
     static boolean playing = false; 
     
@@ -18,11 +17,16 @@ public class GameStateData {
     //Score
     static double perfectOffset = 100;
     static double goodOffset = 200;
+    static double perfectScore = 100;
+    static double goodScore = 50;
+    static double missPenaltyScore = 10;
 
     //Layout
     static double fretSpacing = 10;
     static double fretCircleRadius = 30;
     static int numberOfFretNotes = 10;
+    static double noteSpawnY = 50.0;
+    static double fretY = 607+fretCircleRadius;
 
     //Dette mappet er laget av gemini, og matcher ikke helt fargen jeg har i fxml. 
     public static final Map<Integer, Color> NOTE_COLORS = new HashMap<>() {{

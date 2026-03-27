@@ -26,8 +26,6 @@ public class Note implements Comparable<Note>{
         else{
             this.key = "default";
         }
-
-        this.appeareance.setLayoutX(GameStateData.noteSpawnPositions.getOrDefault(this.key, 500.0));
         this.appeareance.setLayoutX(
             GameStateData.noteSpawnPositions.get(
                 GameStateData.keyBindsMap.getOrDefault(key, GameStateData.defaultKey)

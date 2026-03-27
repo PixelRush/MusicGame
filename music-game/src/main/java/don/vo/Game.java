@@ -126,7 +126,6 @@ public class Game {
     }
 
     public void saveRecordToFile(){
-        //TODO: Må finne en måte å velge filnavn? For nå bruker jeg default. 
         FileHandling.writeSongRecordToFile(songRecord, GameStateData.songRecordSelectedID + ".txt");
     }
     
@@ -156,7 +155,7 @@ public class Game {
                 addNoteToScreen(noteSpawner.spawnNote(getSongTime()));
 
                 for (Note note : notesOnScreen) {
-                    note.moveTo(getSongTime(), note.getY(), 50, 700);
+                    note.moveTo(getSongTime(), note.getY(), GameStateData.noteSpawnY, GameStateData.fretY);
                     if (score.isOffScreen(note)){
                         addNoteToTrash(note);
                         scoreCounter.setText(String.valueOf(score.getScore()));
@@ -169,6 +168,4 @@ public class Game {
         animationTimer.start();
 
     }
-
-
 }
