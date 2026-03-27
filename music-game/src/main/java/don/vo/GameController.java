@@ -5,7 +5,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class GameController {
@@ -20,6 +23,12 @@ public class GameController {
 
     @FXML
     Button writeToFileButton;
+
+    @FXML 
+    Text scoreCounter;
+
+    @FXML
+    HBox fretHBox;
 
 
     @FXML
@@ -44,6 +53,11 @@ public class GameController {
         App.setRoot("lobby");
     }
 
+    @FXML
+    void debug(){
+        this.game.debug();
+    }
+
 
     @FXML
     void addNotePressed(){
@@ -59,7 +73,7 @@ public class GameController {
 
     @FXML
     void initialize(){
-        this.game = new Game(gameRootContainer);
+        this.game = new Game(this.gameRootContainer, this.scoreCounter, this.fretHBox);
 
         //Kan skrive dette i annen klasse hvis jeg ønkser... men ikke nå. 
         if (GameStateData.recording == false){
@@ -76,7 +90,6 @@ public class GameController {
 
         if (GameStateData.playing){
             gameRootContainer.setOnKeyPressed(event -> {
-            System.out.println("Playing");
             this.game.keyPressed(event.getCode().toString());
         
         });
@@ -84,7 +97,6 @@ public class GameController {
 
         if (GameStateData.recording){
             gameRootContainer.setOnKeyPressed(event -> {
-            System.out.println("Recording");
             this.game.recordingKeyPressed(event.getCode().toString());
         });    
         }

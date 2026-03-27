@@ -1,6 +1,7 @@
 package don.vo;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -18,18 +19,21 @@ public class Note implements Comparable<Note>{
         this.appeareance = new Circle(30, Color.AQUA);
         this.hitDuration = timeStamp.getDuration();
         this.spawDuration = new Duration(hitDuration.toMillis()-GameStateData.timeBeforeHit);
-        this.key = timeStamp.getKey();
-        
 
-        //TODO: Testing code, remove later
-        this.appeareance.setLayoutX(500);
+        if (GameStateData.keyBindsMap.containsKey(timeStamp.getKey())){
+            this.key = timeStamp.getKey();
+        }
+        else{
+            this.key = "default";
+        }
 
         this.appeareance.setLayoutX(GameStateData.noteSpawnPositions.getOrDefault(this.key, 500.0));
         this.appeareance.setLayoutX(
             GameStateData.noteSpawnPositions.get(
-                GameStateData.keyBindsMap.getOrDefault(key, "Default")
-            )
-        );
+                GameStateData.keyBindsMap.getOrDefault(key, GameStateData.defaultKey)
+            ));
+        Paint paint = GameStateData.NOTE_COLORS.get(GameStateData.keyBindsMap.getOrDefault(this.key, 67));
+        this.appeareance.setFill(paint);
     }
 
     public Circle getAppeareance() {

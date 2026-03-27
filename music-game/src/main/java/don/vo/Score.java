@@ -11,7 +11,7 @@ public class Score {
 
     boolean isOffScreen(Note note){
         if (note.getY() > 1100){
-            score-=10;
+            this.score-=10;
             return true;
         }
         else{
@@ -19,11 +19,24 @@ public class Score {
         }
     }
 
-    /* boolean isHit(Note note){
-        if 
-    } */
-
-
+    boolean isHit(Note note){
+        double reaction = Math.abs(note.getHitDuration().subtract(song.getCurrentTime()).toMillis());
+        if (reaction <= GameStateData.perfectOffset){
+            this.score += 100;
+            return true;
+        }
+        else if(reaction <= GameStateData.goodOffset){
+            this.score += 50;
+            return true;
+        }
+        else{
+            return false; 
+        }
+    }
+    
+    public double getScore(){
+        return this.score;
+    }
 
 
 

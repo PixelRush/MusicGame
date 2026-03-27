@@ -13,13 +13,13 @@
    <children>
       <AnchorPane fx:id="gameRootContainer" layoutX="26.0" prefHeight="799.0" prefWidth="1038.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button cancelButton="true" layoutX="472.0" layoutY="339.0" mnemonicParsing="false" onAction="#addNotePressed" prefHeight="43.0" prefWidth="116.0" style="-fx-background-color: darkslategrey;" text="Add minion" textFill="#28ffc6" AnchorPane.rightAnchor="14.0" />
+            <Button cancelButton="true" layoutX="472.0" layoutY="339.0" mnemonicParsing="false" onAction="#debug" prefHeight="43.0" prefWidth="116.0" style="-fx-background-color: darkslategrey;" text="Debug" textFill="#28ffc6" AnchorPane.rightAnchor="14.0" />
             <Text fill="WHITE" layoutX="86.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" AnchorPane.bottomAnchor="175.96875" AnchorPane.leftAnchor="86.0">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="109.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="69" AnchorPane.bottomAnchor="119.96875" AnchorPane.leftAnchor="109.0">
+            <Text fx:id="scoreCounter" fill="WHITE" layoutX="109.0" layoutY="671.0" strokeType="OUTSIDE" strokeWidth="0.0" text="69" AnchorPane.bottomAnchor="119.96875" AnchorPane.leftAnchor="109.0">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
@@ -28,12 +28,12 @@
             <Button cancelButton="true" layoutX="80.0" layoutY="18.0" mnemonicParsing="false" onAction="#playMusic" prefHeight="25.0" prefWidth="47.0" style="-fx-background-color: darkslategrey;" text="Play" textFill="#28ffc6" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="18.0" />
             <Button cancelButton="true" layoutX="138.0" layoutY="18.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="47.0" style="-fx-background-color: darkslategrey;" text="Back" textFill="#28ffc6" AnchorPane.leftAnchor="138.0" AnchorPane.topAnchor="18.0" />
             <Line endX="907.5" layoutX="44.0" layoutY="502.0" startX="-100.0" stroke="WHITE" AnchorPane.topAnchor="700.0" />
-            <HBox layoutX="239.0" layoutY="607.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox fx:id="fretHBox" layoutX="239.0" layoutY="607.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <padding>
                   <Insets right="20.0" />
                </padding>
                <children>
-                  <Circle fill="#9421ff" radius="30.0" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="purpleCircle" fill="#9421ff" radius="30.0" stroke="BLACK" strokeType="INSIDE">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -49,7 +49,7 @@
                   <Circle fill="#136ccf" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
             </HBox>
-            <Button fx:id="writeToFileButton" cancelButton="true" layoutX="910.0" layoutY="299.0" mnemonicParsing="false" onAction="#saveRecordToFile" style="-fx-background-color: darkslategrey;" text="Save record to file" textFill="#28ffc6" />
+            <Button fx:id="writeToFileButton" cancelButton="true" layoutX="910.0" layoutY="299.0" mnemonicParsing="false" onAction="#saveRecordToFile" style="-fx-background-color: darkslategrey;" text="Save record to file" textFill="#28ffc6" AnchorPane.rightAnchor="16.0" />
          </children>
       </AnchorPane>
    </children>
