@@ -35,7 +35,7 @@ public class GameStateData {
     put(7, Color.web("#c0ff21")); // Lime
     put(8, Color.web("#24c72b")); // Green
     put(9, Color.web("#12d0d0")); // Cyan
-    put(0, Color.web("#136ccf")); // Blue
+    put(10, Color.web("#136ccf")); // Blue
     put(67, Color.WHITE);
 }};
 
