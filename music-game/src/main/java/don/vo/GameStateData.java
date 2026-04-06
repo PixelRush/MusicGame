@@ -9,17 +9,21 @@ public class GameStateData {
     static String songSelectedID = "BarbieGirl";
     static String songRecordSelectedID = "Empty";
     static int frameRate = 60;
-    static double timeBeforeHit = 700; //I milisekunder 
     static boolean recording = false;
     static boolean playing = false; 
     
 
+    //Gameplay 
+    static double latency = 0; //Dersom notene kommer for sent, må du ha negativ verdi her
+    //25ms latency for bose headsetet
+    static double timeBeforeHit = 500; //I milisekunder 
+
     //Score
-    static double perfectOffset = 100;
-    static double goodOffset = 200;
+    static double perfectOffset = 50;
+    static double goodOffset = 100;
     static double perfectScore = 100;
     static double goodScore = 50;
-    static double missPenaltyScore = 10;
+    static double missPenaltyScore = 200;
 
     //Layout
     static double fretSpacing = 10;
@@ -29,7 +33,7 @@ public class GameStateData {
     static double fretY = 607+fretCircleRadius;
 
     //Dette mappet er laget av gemini, og matcher ikke helt fargen jeg har i fxml. 
-    public static final Map<Integer, Color> NOTE_COLORS = new HashMap<>() {{
+    static final Map<Integer, Color> NOTE_COLORS = new HashMap<>() {{
     put(1, Color.web("#7b1fa2")); // Deep Purple 
     put(2, Color.web("#e51fff")); // Purple
     put(3, Color.web("#ff1f6b")); // Pink/Magenta

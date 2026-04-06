@@ -17,7 +17,7 @@ public class Note implements Comparable<Note>{
 
     public Note(TimeStamp timeStamp){
         this.appeareance = new Circle(30, Color.AQUA);
-        this.hitDuration = timeStamp.getDuration();
+        this.hitDuration = timeStamp.getDuration().add(new Duration(GameStateData.latency));
         this.spawDuration = new Duration(hitDuration.toMillis()-GameStateData.timeBeforeHit);
 
         if (GameStateData.keyBindsMap.containsKey(timeStamp.getKey())){
@@ -46,7 +46,7 @@ public class Note implements Comparable<Note>{
         this.appeareance.setLayoutY(this.appeareance.getLayoutY()+amount);
     }
 
-    public void moveTo(Duration currentTime, double currentY, double startY, double endY){
+    public void moveTo(Duration currentTime, double startY, double endY){
        Duration travelDuration = this.hitDuration.subtract(this.spawDuration);
        double totalTravelDistance = endY - startY;
        double correctPosition = (currentTime.subtract(this.spawDuration).toMillis()/travelDuration.toMillis())*totalTravelDistance+startY;

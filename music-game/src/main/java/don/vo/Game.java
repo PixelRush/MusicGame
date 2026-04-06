@@ -33,7 +33,7 @@ public class Game {
 
     private HBox fretHBox;
 
-    public Game(AnchorPane anchorPane, Text scoreCounter, HBox fretHBox){
+    Game(AnchorPane anchorPane, Text scoreCounter, HBox fretHBox){
         if (anchorPane == null || scoreCounter == null || fretHBox == null){
             throw new IllegalArgumentException("Game constructor was called with null argument");
         }
@@ -50,7 +50,7 @@ public class Game {
         this.score = new Score(this.song);
     }
 
-    public void addNoteToScreen(Optional<Note> optionalNote){
+    private void addNoteToScreen(Optional<Note> optionalNote){
         Note note;
         if (optionalNote.isPresent()){
             note = optionalNote.get();
@@ -155,7 +155,7 @@ public class Game {
                 addNoteToScreen(noteSpawner.spawnNote(getSongTime()));
 
                 for (Note note : notesOnScreen) {
-                    note.moveTo(getSongTime(), note.getY(), GameStateData.noteSpawnY, GameStateData.fretY);
+                    note.moveTo(getSongTime(), GameStateData.noteSpawnY, GameStateData.fretY);
                     if (score.isOffScreen(note)){
                         addNoteToTrash(note);
                         scoreCounter.setText(String.valueOf(score.getScore()));

@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 public class FileTesting {
 
-    static void BufferedWriterTest(){
+    private static void BufferedWriterTest(){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("fileTest\\testy.txt"));
             BufferedWriter writer3 = new BufferedWriter(new FileWriter(Path.of("fileTest", "test69.txt").toString()));
@@ -39,7 +39,7 @@ public class FileTesting {
     }
 
 
-    static void BufferedReaderTest(){
+    private static void BufferedReaderTest(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Paths.get("fileTest", "testy.txt").toString()));
             System.out.println(reader.readLine());
@@ -53,7 +53,7 @@ public class FileTesting {
         }
     }
 
-    static void printFilesInFolder(Path path){
+    private static void printFilesInFolder(Path path){
         try {
             Stream<Path> stream = Files.list(path);
             stream.forEach(System.out::println);
@@ -64,7 +64,7 @@ public class FileTesting {
         }
     }
 
-    static ArrayList<String> getFilesInFolderArray(Path path){
+    private static ArrayList<String> getFilesInFolderArray(Path path){
         ArrayList<String> fileList = new ArrayList<>();
         try {
             Stream<Path> stream = Files.list(path);
@@ -77,7 +77,7 @@ public class FileTesting {
         return fileList;
     }
 
-    static ArrayList<String> getMusicFileNames(){
+    private static ArrayList<String> getMusicFileNames(){
         List<String> list = FileTesting.getFilesInFolderArray(Path.of("music-game", "src", "main", "resources", "don", "vo", "music"));
         ArrayList<String> returnList = new ArrayList<>();
         for (String pathString : list) {
@@ -86,7 +86,7 @@ public class FileTesting {
         return returnList;
     }
 
-    static List<SongData> LoadSongs(){
+    private static List<SongData> LoadSongs(){
         List<SongData> returnList = new ArrayList<>();
         for (String songName : getMusicFileNames()) {
             returnList.add(new SongData(songName, songName));
