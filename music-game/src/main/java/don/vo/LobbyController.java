@@ -26,20 +26,31 @@ public class LobbyController {
     private List<SongData> allSongs = FileHandling.getSongsList();
 
     @FXML
-    void playSong(ActionEvent event) throws IOException{
+    private void playSong(ActionEvent event) throws IOException{
         GameStateData.playing = true;
-        //TODO: Kanskje legge til en sjekk om at en sang er valgt. 
-        App.setRoot("levelEdit");
+        
+        if (LevelEdit.valiLevelEditState()){
+            App.setRoot("levelEdit");
+        }
+        else{
+            ErrorHandling.showErrorMessage("No song selected!");
+        }
     }
 
     @FXML
-    void recordSong(ActionEvent event) throws IOException {
+    private void recordSong(ActionEvent event) throws IOException {
         GameStateData.recording = true; 
-        App.setRoot("levelEdit");
+
+        if (LevelEdit.valiLevelEditState()){
+            App.setRoot("levelEdit");
+        }
+        else{
+            ErrorHandling.showErrorMessage("No song selected!");
+        }
     }
 
     @FXML
-    void initialize(){
+    private void initialize(){
         for (SongData songData : allSongs) {
 
             TextButton songSelectButton = new TextButton(

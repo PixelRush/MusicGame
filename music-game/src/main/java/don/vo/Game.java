@@ -33,6 +33,13 @@ public class Game {
 
     private HBox fretHBox;
 
+    static public boolean validGameState(){ 
+        if(!GameStateData.songRecordSelectedID.isEmpty()){
+            return true;
+        }
+        return false; 
+    }
+
     Game(AnchorPane anchorPane, Text scoreCounter, HBox fretHBox){
         if (anchorPane == null || scoreCounter == null || fretHBox == null){
             throw new IllegalArgumentException("Game constructor was called with null argument");
@@ -45,7 +52,8 @@ public class Game {
         //Denne linjen under feiler hvis det ikke finnes en slik fil, uansett om du trykker play eller record 
         // det er fordi denne konstruktøren alltid prøver å lage SongRecord objektet. 
         this.songRecord = FileHandling.importSongRecordFromFile(GameStateData.songRecordSelectedID + ".txt");
-        setNoteSpawnLocations(this.fretHBox.getLayoutX()); //Det er viktig at disse settes før notene lages!!! 
+        setNoteSpawnLocations(this.fretHBox.getLayoutX()); 
+        //Det er viktig at disse settes før notene lages!!! Må derfor kalles før noteSpawner konstrultøren kalles
         this.noteSpawner = new NoteSpawner(this.songRecord);
         this.score = new Score(this.song);
     }
@@ -129,15 +137,13 @@ public class Game {
         FileHandling.writeSongRecordToFile(songRecord, GameStateData.songRecordSelectedID + ".txt");
     }
     
-    public void setNoteSpawnLocations(double x){
+    private void setNoteSpawnLocations(double x){
         ArrayList<Double> circlePositions = new ArrayList<>();
         for (int i = 0; i < GameStateData.numberOfFretNotes; i++) {
             circlePositions.add(x+GameStateData.fretCircleRadius*2*i+GameStateData.fretSpacing*i+GameStateData.fretCircleRadius);
             GameStateData.noteSpawnPositions.replace(i+1, circlePositions.get(i));
 
         }
-
-        
         
     }
 
@@ -148,7 +154,6 @@ public class Game {
     /*
     Denne kalles når play knappen trykkes på */
     void play(){
-
         AnimationTimer animationTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -166,6 +171,5 @@ public class Game {
             }
         };
         animationTimer.start();
-
     }
 }

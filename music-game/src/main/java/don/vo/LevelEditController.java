@@ -23,20 +23,26 @@ public class LevelEditController {
     private ArrayList<String> songRecordNameList = new ArrayList<>();
 
     @FXML
-    void playSong(ActionEvent event) throws IOException {
-        App.setRoot("game");
+    private void playSong(ActionEvent event) throws IOException {
+        if (Game.validGameState()){
+            App.setRoot("game");
+        }
+        else{
+            System.out.println("No song level selected!");
+            ErrorHandling.showErrorMessage("No song level selected!");
+        }
     }
-
     @FXML
-    void backButtonPressed(ActionEvent event) throws IOException{
-        GameStateData.songRecordSelectedID = "Empty";
+    private void backButtonPressed(ActionEvent event) throws IOException{
+        GameStateData.songSelectedID = "";
+        GameStateData.songRecordSelectedID = "";
         GameStateData.recording = false;
         GameStateData.playing = false;
         App.setRoot("lobby");
     }
 
     @FXML
-    void initialize(){
+    private void initialize(){
         songRecordNameList = FileHandling.getSongRecordsFromSong(GameStateData.songSelectedID);
         for (String string : songRecordNameList) {
             songViewVBox.getChildren().add(new TextButton(string, ()->{

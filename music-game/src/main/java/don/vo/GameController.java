@@ -19,60 +19,62 @@ public class GameController {
     private AnchorPane gameRootContainer;
 
     @FXML
-    Circle purpleCircle;
+    private Circle purpleCircle;
 
     @FXML
-    Button writeToFileButton;
+    private Button writeToFileButton;
 
     @FXML 
-    Text scoreCounter;
+    private Text scoreCounter;
 
     @FXML
-    HBox fretHBox;
+    private HBox fretHBox;
 
 
     @FXML
-    void playMusic(){
+    private void playMusic(){
         this.game.playSong();
         this.game.play();
         
     }
 
     @FXML
-    void pauseMusic(){
+    private void pauseMusic(){
         this.game.pauseSong();
     }
 
     @FXML
-    void back()throws IOException{
+    private void back()throws IOException{
         //Må sette på pause fordi den fortsetter... 
         pauseMusic();
         GameStateData.playing = false;
         GameStateData.recording = false;
-
+        GameStateData.songRecordSelectedID = "";
+        GameStateData.songSelectedID = "";
         App.setRoot("lobby");
     }
 
     @FXML
-    void debug(){
+    private void debug(){
         this.game.debug();
     }
 
 
+    //Gammel funksjon... 
     @FXML
-    void addNotePressed(){
+    private void addNotePressed(){
         //this.game.addNoteToScreen(new Note(new TimeStamp("k", new Duration(5000))));
         //Jeg endrer på aaddNoteToScreen til å ta en optional note, denne vil derfor ikke kjøre 
     }
 
     @FXML 
-    void saveRecordToFile(){
+    private void saveRecordToFile(){
         this.game.saveRecordToFile();
     }
 
 
     @FXML
-    void initialize(){
+    private void initialize(){
         this.game = new Game(this.gameRootContainer, this.scoreCounter, this.fretHBox);
 
         //Kan skrive dette i annen klasse hvis jeg ønkser... men ikke nå. 

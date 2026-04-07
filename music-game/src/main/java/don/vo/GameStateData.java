@@ -6,8 +6,8 @@ import java.util.Map;
 import javafx.scene.paint.Color;
 
 public class GameStateData {
-    static String songSelectedID = "BarbieGirl";
-    static String songRecordSelectedID = "Empty";
+    static String songSelectedID = "";
+    static String songRecordSelectedID = "";
     static int frameRate = 60;
     static boolean recording = false;
     static boolean playing = false; 

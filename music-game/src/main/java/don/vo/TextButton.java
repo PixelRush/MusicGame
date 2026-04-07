@@ -1,4 +1,5 @@
 package don.vo;
+import javafx.scene.Node;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -11,7 +12,7 @@ public class TextButton {
         this.appearance.setFont(Font.font(20));
     }
 
-    public Text getAppearance() {
+    public Node getAppearance(){
         return appearance;
     }
 

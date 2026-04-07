@@ -6,7 +6,6 @@ module don.vo {
     requires javafx.graphics;
     requires java.xml;
     requires javafx.base;
-
     opens don.vo to javafx.fxml, javafx.media;
     exports don.vo;
 
