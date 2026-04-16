@@ -118,7 +118,7 @@ public class Game {
 
     //Kjører når en tast trykkes på og spiller har valgt play og ikke record. 
     public void keyPressed(String key){
-        System.out.println("Key pressed: " + key + "at " + getSongTime().toString());
+        System.out.println("Key pressed: " + key + " at " + getSongTime().toString());
         for (Note note : notesOnScreen) {
             if (note.getKey().equals(key)){
                 if (this.score.isHit(note)) {

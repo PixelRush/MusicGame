@@ -6,6 +6,9 @@ public class Score {
 
     
     public Score(Song song) {
+        if (song == null){
+            throw new IllegalArgumentException("Score constructor was called with null Song");
+        }
         this.song = song;
     }
 

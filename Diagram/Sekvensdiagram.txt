@@ -1,0 +1,12 @@
+@startuml
+User -> GameController: Pressed play button
+GameController -> Game: playMusic()
+Game -> Song: play()
+
+User -> GameController: Pressed U key
+GameController -> Game: keyPressed("U")
+Game -> Score: isHit(note)
+
+
+
+@enduml

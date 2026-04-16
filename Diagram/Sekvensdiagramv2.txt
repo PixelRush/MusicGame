@@ -1,0 +1,23 @@
+@startuml
+
+skinparam actorStyle awesome
+actor User
+
+User -> GameController: Pressed play button
+GameController -> Game: playMusic()
+Game -> Song: play()
+
+User -> GameController: Pressed U key
+GameController -> Game: keyPressed("U")
+
+
+loop for each note on screen
+    Game -> Score: isHit(note)
+ 
+end
+Game -> Score: getScore()
+Score-> Game: 6700
+
+
+
+@enduml

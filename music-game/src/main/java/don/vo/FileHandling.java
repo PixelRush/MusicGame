@@ -36,6 +36,10 @@ public class FileHandling {
 
     static void writeSongRecordToFile(SongRecord songRecord, String name){
 
+        if (songRecord == null || name == null){
+            throw new IllegalArgumentException("Cannot write from null songRecord / song name");
+        }
+
         try { 
             Path path;
             if (Files.exists(Path.of("Song Records"))){
