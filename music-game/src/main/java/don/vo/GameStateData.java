@@ -14,7 +14,7 @@ public class GameStateData {
     
 
     //Gameplay 
-    static double latency = 0; //Dersom notene kommer for sent, må du ha negativ verdi her
+    static double latency = -100; //Dersom notene kommer for sent, må du ha negativ verdi her
     //25ms latency for bose headsetet
     static double timeBeforeHit = 500; //I milisekunder 
 
